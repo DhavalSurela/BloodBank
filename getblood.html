@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Get Blood</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp"
+      crossorigin="anonymous"
+    />
+    <style>
+     
+     
+
+      
+      
+      body {
+        margin: 240px;
+        display: flex;
+        align-items: center;
+        
+        
+       
+        background-color: #f5f5f5;
+      }
+
+      .form-signin {
+        max-width: 330px;
+        padding: 15px;
+      }
+      .form-signup {
+        max-width: 500px;
+        padding: 15px;
+      }
+
+      .form-signin .form-floating:focus-within {
+        z-index: 2;
+      }
+
+      .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+      .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+      h1 {
+        text-align: center;
+      }
+    </style>
+    
+    <script>
+      function validateForm() {
+        var name = document.forms["myForm"]["name"].value;
+        var gender = document.forms["myForm"]["gender"].value;
+       
+        
+        var email = document.forms["myForm"]["email"].value;
+        var mobile = document.forms["myForm"]["mobile"].value;
+        
+        var address = document.forms["myForm"]["address"].value;
+
+        // Validate name (not empty)
+        if (name === "") {
+          displayErrorMessage("nameError", "Name must be filled out");
+          return false;
+        } else {
+          hideErrorMessage("nameError");
+        }
+
+        // Validate gender (not empty)
+        if (gender === "") {
+          displayErrorMessage("genderError", "Please select a blood group");
+          return false;
+        } else {
+          hideErrorMessage("genderError");
+        }
+
+
+        
+        // Validate email format
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          displayErrorMessage("emailError", "Invalid email format");
+          return false;
+        } else {
+          hideErrorMessage("emailError");
+        }
+
+        // Validate mobile number (10 digits)
+        var mobileRegex = /^\d{10}$/;
+        if (!mobileRegex.test(mobile)) {
+          displayErrorMessage("mobileError", "Invalid mobile number");
+          return false;
+        } else {
+          hideErrorMessage("mobileError");
+        }
+
+        // All fields are valid
+        return true;
+      }
+
+      function displayErrorMessage(elementId, message) {
+        var errorElement = document.getElementById(elementId);
+        errorElement.textContent = message;
+        errorElement.style.display = "block";
+      }
+
+      function hideErrorMessage(elementId) {
+        var errorElement = document.getElementById(elementId);
+        errorElement.style.display = "none";
+      }
+    </script>
+  </head>
+  <body>
+    <main class="form-signup w-100 m-auto border border-3 shadow p-3 mb-5 bg-body-danger rounded">
+      <form name="myForm" class="row g-3" onsubmit="return validateForm()">
+        <h1 class="h3 mb-3 fw-normal">Get Blood</h1>
+
+        <div class="form-group col-md-6">
+          <label for="name">Name:</label>
+          <input type="text" id="name" class="form-control" name="name" required />
+          <span id="nameError" class="error-message"></span>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="gender">Gender:</label>
+          <select id="gender" class="form-control" name="Blood Type" required>
+            <option value="">-- Select Blood Type --</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            
+          </select>
+          <span id="genderError" class="error-message"></span>
+        </div>
+       
+       
+        <div class="form-group col-md-6">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email" name="email" required />
+          <!-- <span id="emailError" class="form-control" class="error-message"></span> -->
+        </div>
+        <div class="form-group col-md-6">
+          <label for="mobile">Mobile Number:</label>
+          <input type="tel" id="mobile" class="form-control" name="mobile" pattern="[0-9]{10}" required />
+          <span id="mobileError" class="error-message"></span>
+        </div>
+       
+
+
+        <div class="form-group">
+          <label for="address">Full Address:</label>
+          <textarea id="address" class="form-control" name="address" required></textarea>
+          <span id="addressError" class="error-message"></span>
+        </div>
+
+        <input type="submit" value="Submit" class="btn btn-primary form-control" />
+      </form>
+    </main>
+  </body>
+</html>
